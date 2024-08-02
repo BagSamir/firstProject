@@ -12,8 +12,10 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "users")
     @ManyToMany(mappedBy = "roles")
     @JsonBackReference

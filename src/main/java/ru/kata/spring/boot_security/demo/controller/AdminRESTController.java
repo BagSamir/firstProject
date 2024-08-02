@@ -19,7 +19,7 @@ public class AdminRESTController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<User>> getUser() {
+    public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok(userService.listUsers());
     }
 

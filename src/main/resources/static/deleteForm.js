@@ -1,12 +1,14 @@
 const modalDelete = document.getElementById("deleteForm")
+const buttonDelete = document.getElementById("deleteBtn")
 
 
-modalDelete.addEventListener("submit",  (event) => {
-    event.preventDefault();
 
-    console.log(document.getElementById("idDel"))
-    console.log(event.target)
-})
+// buttonDelete.addEventListener("click",  (event) => {
+//     event.preventDefault();
+//
+//     console.log(document.getElementById("idDel"))
+// })
+
 
 
 // async function deleteModel(userid) {

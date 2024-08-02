@@ -1,37 +1,37 @@
 const addForm = document.getElementById("addForm")
-const roles = document.getElementById("rolesEdit")
 
-addForm.addEventListener("submit", async (event) => {
+addForm.addEventListener("submit", (event) => {
     event.preventDefault()
 
+    const formData = new FormData(addForm);
+    const object = {
+        roles: []
+    };
 
-    let role = "";
-        if (roles.value === "ADMIN") {
-            role = "ROLE_ADMIN"
-        } else if (roles.value === "USER") {
-            role = "ROLE_USER"
+    formData.forEach((value, key) => {
+        if (key === "rolesId"){
+
+            const roleId = value.split(" ")[0];
+            const roleName = value.split(" ")[1];
+            const role = {
+                id : roleId,
+                name : roleName
+            };
+            object.roles.push(role);
+        } else {
+            object[key] = value;
         }
+    });
+    console.log(object)
 
-    const user = {
-        firstName: document.getElementById("firstName").value,
-        lastName: document.getElementById("lastName").value,
-        age: document.getElementById("age").value,
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
-        role: role
-    }
-
-
-    console.log(user)
-    await sendDataForm(user)
-})
-
-async function sendDataForm(user) {
-    await fetch("/api/admin", {
-        method: "PUT",
+    fetch("/api/admin", {
+        method: "POST",
         headers: {
             "Content-type": "application/json"
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify(object)
     })
-}
+        .then(() => getUsers())
+        .then(() => addForm.reset())
+})
+

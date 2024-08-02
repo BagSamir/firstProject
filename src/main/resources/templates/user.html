@@ -12,10 +12,19 @@
 
 <div class="container-fluid">
     <div class="d-flex">
-        <div class="nav flex-column nav-pills w-25" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <button class="nav-link active" id="user-tab" data-toggle="pill" data-target="#v-pills-user"
-                    type="button" role="tab" aria-controls="v-pills-user" aria-selected="true">User
-            </button>
+        <div class="col-2 bg-white pt-3 min-vh-100 px-0">
+            <div class="container-fluid px-0">
+                <ul class="nav flex-column nav-pills ">
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin">Admin</a>
+                        </li>
+                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/user">User</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="tab-content mt-3 ms-4 w-100" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-user" role="tabpanel" aria-labelledby="user-tab">

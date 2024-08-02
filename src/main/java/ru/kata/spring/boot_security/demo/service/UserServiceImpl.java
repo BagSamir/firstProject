@@ -39,6 +39,13 @@ public class UserServiceImpl implements UserService {
         userDao.add(user);
     }
 
+    @Transactional
+    public void add(User user, List<Role> roles) {
+        user.setRoles(roles);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userDao.add(user);
+    }
+
     @Override
     @Transactional
     public void update(User user) {
@@ -49,6 +56,16 @@ public class UserServiceImpl implements UserService {
             user.setPassword(userDao.getById(user.getId()).getPassword());
             userDao.update(user);
         }
+    }
+
+    @Transactional
+    public void update(User user, List<Role> roles) {
+        User userB = getById(user.getId());
+        if (!userB.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        user.setRoles(roles);
+        userDao.update(user);
     }
 
     @Override

@@ -1,4 +1,5 @@
 const editModal = document.getElementById('ModalEdit')
+
 editModal.addEventListener('show.bs.modal', event => {
 
     const button = event.relatedTarget
@@ -15,7 +16,6 @@ editModal.addEventListener('show.bs.modal', event => {
     const modalUserAge = editModal.querySelector('#user_age')
     const modalUserEmail = editModal.querySelector('#userEmail')
 
-
     modalUserId.value = userId
     modalUserFirstName.value = fistName
     modalUserLastName.value = lastName
@@ -29,7 +29,7 @@ formEdit.addEventListener('submit', e => {
 
     const formData = new FormData(formEdit);
     const object = {
-        role: ""
+        roles: []
     };
 
     formData.forEach((value, key) => {
@@ -37,12 +37,11 @@ formEdit.addEventListener('submit', e => {
 
                 const roleId = value.split(" ")[0];
                 const roleName = value.split(" ")[1];
-                // const role = {
-                //     id : roleId,
-                //     role : roleName
-                // };
-                object.role = roleName
-                // object.role.push(role);
+                const role = {
+                    id : roleId,
+                    name : roleName
+                };
+                object.roles.push(role);
             } else {
                 object[key] = value;
             }
